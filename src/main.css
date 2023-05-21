@@ -1,0 +1,139 @@
+html {
+  --color-black: #0e111b;
+  --color-white: #fff;
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-5: rgba(255, 255, 255, 0.05);
+  --color-primary: #fdc000;
+  --color-hover: #f86a05;
+  --color-area: #1c212e;
+}
+body {
+  background-color: var(--color-black);
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4;
+  color: var(--color-white);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.btn {
+  height: 50px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+  background-color: var(--color-area);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  background-color: var(--color-hover);
+}
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+}
+.btn-primary:hover {
+  background-color: var(--color-hover);
+  color: var(--color-white);
+}
+
+.headline {
+  margin-bottom: 40px;
+}
+.headline h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 80px;
+  line-height: 1;
+  margin-bottom: 40px;
+}
+.headline h1 span {
+  color: var(--color-primary);
+}
+.headline p {
+  color: var(--color-white-30);
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.search input {
+  flex-grow: 1;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--color-white);
+  background-color: var(--color-area);
+}
+.search input::placeholder {
+  color: var(--color-white-30);
+}
+.search .btn {
+  flex-grow: 1;
+  max-width: 150px;
+}
+
+.movie-list {
+  padding: 20px;
+  border-radius: 4px;
+  background-color: var(--color-area);
+}
+.movie-list .movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.movies .movie {
+  --width: 200px;
+  width: var(--width);
+  height: calc(var(--width) * 3 / 2);
+  border-radius: 4px;
+  background-color: var(--color-black);
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+.movies .movie:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 6px solid var(--color-primary);
+}
+.movies .movie .info {
+  width: 100%;
+  padding: 14px;
+  box-sizing: border-box;
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(14, 17, 27, 0.3);
+  backdrop-filter: blur(10px);
+}
+.movies .movie .info .year {
+  color: var(--color-primary);
+}
+.movies .movie .info .title {
+  color: var(--color-white);
+}
