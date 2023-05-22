@@ -710,7 +710,7 @@ exports.default = (0, _rami.createRouter)([
     }
 ]);
 
-},{"../core/rami":"3wxuq","./Home":"0JSNG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Movie":"1LTyN"}],"0JSNG":[function(require,module,exports) {
+},{"../core/rami":"3wxuq","./Home":"0JSNG","./Movie":"1LTyN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"0JSNG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
@@ -811,7 +811,7 @@ const searchMovies = async (page)=>{
         store.state.message = "";
     }
     try {
-        const res = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c7be1e86&s=${store.state.searchText}&page=${page}` //APIkey확인 잘못 넣을 시 작동안함
+        const res = await fetch(`https://www.omdbapi.com/?apikey=c7be1e86&s=${store.state.searchText}&page=${page}` //APIkey확인 잘못 넣을 시 작동안함****
         );
         const { Search , totalResults , Response , Error  } = await res.json();
         if (Response === "True") {
@@ -829,10 +829,11 @@ const searchMovies = async (page)=>{
 };
 const getMovieDetails = async (id)=>{
     try {
-        const res = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c7be1e86&i=${id}&plot=full`);
+        const res = await fetch(`https://www.omdbapi.com/?apikey=c7be1e86&i=${id}&plot=full` //APIkey확인 잘못 넣을 시 작동안함****
+        );
         store.state.movie = await res.json();
     } catch (error) {
-        console.log("getMovieDetail error:", error);
+        console.log("getMovieDetails error:", error);
     }
 };
 
@@ -947,6 +948,49 @@ class Movie extends (0, _rami.Component) {
     async render() {
         await (0, _movie.getMovieDetails)(history.state.id);
         console.log((0, _movieDefault.default).state.movie);
+        const { movie  } = (0, _movieDefault.default).state;
+        this.el.classList.add("container", "the-movie");
+        this.el.innerHTML = /* html */ `
+      <div 
+      style="background-image: url(${movie.Poster})"
+      class="poster"></div>
+      <div class="specs">
+        <div class="title">
+          ${movie.Title}
+        </div>
+        <div class="labels">
+          <span>${movie.Released}</span> 
+          &nbsp;/&nbsp; 
+          <span>${movie.Runtime}</span>
+          &nbsp;/&nbsp;
+          <span>${movie.Country}</span>
+        </div>
+        <div class="plot">
+            ${movie.Plot}
+        </div>
+        <div>
+            <h3>Ratings</h3>
+            ${movie.Ratings.map((rating)=>{
+            return `<p>${rating.Source} - ${rating.Value}</p>`;
+        }).join("")}
+        </div>
+        <div>
+            <h3>Actors</h3>
+            <p>${movie.Actors}</p>
+        </div>
+        <div>
+            <h3>Director</h3>
+            <p>${movie.Director}</p>
+        </div>
+        <div>
+            <h3>Production</h3>
+            <p>${movie.Production}</p>
+        </div>
+        <div>
+            <h3>Genre</h3>
+            <p>${movie.Genre}</p>
+        </div>
+    `;
     }
 }
 exports.default = Movie;

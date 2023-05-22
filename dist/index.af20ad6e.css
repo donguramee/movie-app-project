@@ -192,4 +192,44 @@ body {
   display: none;
 }
 
+.the-movie {
+  color: var(--color-white-50);
+  gap: 70px;
+  display: flex;
+}
+
+.the-movie .poster {
+  --width: 500px;
+  width: var(--width);
+  height: calc(var(--width) * 3 / 2);
+  background-size: cover;
+  background-color: var(--color-area);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.the-movie .specs {
+  flex-grow: 1;
+}
+
+.the-movie .title {
+  color: var(--color-white);
+  margin-bottom: 30px;
+  font-family: Oswald, sans-serif;
+  font-size: 70px;
+  line-height: 1;
+}
+
+.the-movie .labels {
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.the-movie h3 {
+  color: var(--color-white);
+  margin: 24px 0 6px;
+  font-family: Oswald, sans-serif;
+  font-size: 20px;
+}
+
 /*# sourceMappingURL=index.af20ad6e.css.map */

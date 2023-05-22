@@ -20,7 +20,7 @@ export const searchMovies = async (page) => {
   }
   try {
     const res = await fetch(
-      `https://www.omdbapi.com/?i=tt3896198&apikey=c7be1e86&s=${store.state.searchText}&page=${page}` //APIkey확인 잘못 넣을 시 작동안함
+      `https://www.omdbapi.com/?apikey=c7be1e86&s=${store.state.searchText}&page=${page}` //APIkey확인 잘못 넣을 시 작동안함****
     );
     const { Search, totalResults, Response, Error } = await res.json();
     if (Response === "True") {
@@ -38,10 +38,10 @@ export const searchMovies = async (page) => {
 export const getMovieDetails = async (id) => {
   try {
     const res = await fetch(
-      `https://www.omdbapi.com/?i=tt3896198&apikey=c7be1e86&i=${id}&plot=full`
+      `https://www.omdbapi.com/?apikey=c7be1e86&i=${id}&plot=full` //APIkey확인 잘못 넣을 시 작동안함****
     );
     store.state.movie = await res.json();
   } catch (error) {
-    console.log("getMovieDetail error:", error);
+    console.log("getMovieDetails error:", error);
   }
 };
