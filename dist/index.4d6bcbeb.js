@@ -584,7 +584,7 @@ class App extends (0, _rami.Component) {
 }
 exports.default = App;
 
-},{"./core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/TheHeader":"3Cyq4","./components/TheFooter":"b3x3c"}],"3wxuq":[function(require,module,exports) {
+},{"./core/rami":"3wxuq","./components/TheHeader":"3Cyq4","./components/TheFooter":"b3x3c","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3wxuq":[function(require,module,exports) {
 ///// Component /////
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -788,7 +788,7 @@ class TheFooter extends (0, _rami.Component) {
 }
 exports.default = TheFooter;
 
-},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}],"4RAJO":[function(require,module,exports) {
+},{"../core/rami":"3wxuq","../store/about":"4RAJO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4RAJO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
@@ -831,7 +831,7 @@ exports.default = (0, _rami.createRouter)([
     }
 ]);
 
-},{"../core/rami":"3wxuq","./Home":"0JSNG","./Movie":"1LTyN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./About":"gdB30","./NotFound":"4fDiL"}],"0JSNG":[function(require,module,exports) {
+},{"../core/rami":"3wxuq","./Home":"0JSNG","./Movie":"1LTyN","./About":"gdB30","./NotFound":"4fDiL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"0JSNG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
@@ -1153,7 +1153,7 @@ class About extends (0, _rami.Component) {
 }
 exports.default = About;
 
-},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}],"4fDiL":[function(require,module,exports) {
+},{"../core/rami":"3wxuq","../store/about":"4RAJO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4fDiL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
