@@ -570,15 +570,21 @@ root.append(new (0, _appDefault.default)().el);
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("./core/rami");
+var _theHeader = require("./components/TheHeader");
+var _theHeaderDefault = parcelHelpers.interopDefault(_theHeader);
+var _theFooter = require("./components/TheFooter");
+var _theFooterDefault = parcelHelpers.interopDefault(_theFooter);
 class App extends (0, _rami.Component) {
     render() {
+        const theHeader = new (0, _theHeaderDefault.default)().el;
+        const theFooter = new (0, _theFooterDefault.default)().el;
         const routerView = document.createElement("router-view");
-        this.el.append(routerView);
+        this.el.append(theHeader, routerView, theFooter);
     }
 }
 exports.default = App;
 
-},{"./core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3wxuq":[function(require,module,exports) {
+},{"./core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/TheHeader":"3Cyq4","./components/TheFooter":"b3x3c"}],"3wxuq":[function(require,module,exports) {
 ///// Component /////
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -691,7 +697,110 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"3L9mC":[function(require,module,exports) {
+},{}],"3Cyq4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rami = require("../core/rami");
+class TheHeader extends (0, _rami.Component) {
+    constructor(){
+        super({
+            tagName: "header",
+            state: {
+                menus: [
+                    {
+                        name: "Search",
+                        href: "#/"
+                    },
+                    {
+                        name: "Movie",
+                        href: "#/movie?id=tt4520988"
+                    },
+                    {
+                        name: "About",
+                        href: "#/about"
+                    }
+                ]
+            }
+        });
+        window.addEventListener("popstate", ()=>{
+            this.render();
+        });
+    }
+    render() {
+        this.el.innerHTML = /* html */ `
+            <a href="#/" class="logo">
+                <span>OMDbAPI</span>.COM
+            </a>
+            <nav>
+                <ul>
+                    ${this.state.menus.map((menu)=>{
+            const href = menu.href.split("?")[0]; //메뉴라는 객체데이터에서 쿼리스트링의 내용은 제거하고 결과를 보관
+            const hash = location.hash.split("?")[0]; //현재페이지에서 쿼리스트링 잠시 제거
+            const isActive = href === hash; //제거한 값이 같으면 isActive 실행
+            return /* html */ `
+                            <li>
+                                <a 
+                                class="${isActive ? "active" : ""}"
+                                href="${menu.href}">
+                                ${menu.name}
+                                </a>
+                            </li>
+                        `;
+        }).join("")}
+                </ul>
+            </nav>
+            <a href="#/about" class="user">
+                <img src="https://heropy.blog/css/images/logo.png" alt="User">
+            </a>
+        `;
+    }
+}
+exports.default = TheHeader;
+
+},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3x3c":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rami = require("../core/rami");
+var _about = require("../store/about");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
+class TheFooter extends (0, _rami.Component) {
+    constructor(){
+        super({
+            tagName: "footer"
+        });
+    }
+    render() {
+        const { github , repository  } = (0, _aboutDefault.default).state;
+        this.el.innerHTML = /* html */ `
+        <div>
+            <a href="${repository}">
+                GitHub Respository
+            </a>
+        </div>
+        <div>
+            <a href="${github}">
+                ${new Date().getFullYear()}
+                DonguRame
+            </a>
+        </div>
+        `;
+    }
+}
+exports.default = TheFooter;
+
+},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}],"4RAJO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rami = require("../core/rami");
+exports.default = new (0, _rami.Store)({
+    photo: "https://heropy.blog/css/images/logo.png",
+    name: "DonguRame / ParkJaeWoong",
+    email: "sanulim94@gmail.com",
+    github: "https://github.com/donguramee",
+    repository: "https://github.com/donguramee/MOVIE-APP"
+});
+
+},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3L9mC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
@@ -699,6 +808,10 @@ var _home = require("./Home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
 var _movie = require("./Movie");
 var _movieDefault = parcelHelpers.interopDefault(_movie);
+var _about = require("./About");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
+var _notFound = require("./NotFound");
+var _notFoundDefault = parcelHelpers.interopDefault(_notFound);
 exports.default = (0, _rami.createRouter)([
     {
         path: "#/",
@@ -707,10 +820,18 @@ exports.default = (0, _rami.createRouter)([
     {
         path: "#/movie",
         component: (0, _movieDefault.default)
+    },
+    {
+        path: "#/about",
+        component: (0, _aboutDefault.default)
+    },
+    {
+        path: ".*",
+        component: (0, _notFoundDefault.default)
     }
 ]);
 
-},{"../core/rami":"3wxuq","./Home":"0JSNG","./Movie":"1LTyN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"0JSNG":[function(require,module,exports) {
+},{"../core/rami":"3wxuq","./Home":"0JSNG","./Movie":"1LTyN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./About":"gdB30","./NotFound":"4fDiL"}],"0JSNG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rami = require("../core/rami");
@@ -767,7 +888,9 @@ class Search extends (0, _rami.Component) {
     render() {
         this.el.classList.add("search");
         this.el.innerHTML = /* html */ `
-        <input placeholder="Enter the movie title to search!" />
+        <input 
+        value="${(0, _movieDefault.default).state.searchText}"
+        placeholder="Enter the movie title to search!" />
         <button class="btn btn-primary">
             Search!
         </button>
@@ -946,13 +1069,22 @@ var _movie = require("../store/movie");
 var _movieDefault = parcelHelpers.interopDefault(_movie);
 class Movie extends (0, _rami.Component) {
     async render() {
+        this.el.classList.add("container", "the-movie");
+        this.el.innerHTML = /* html */ `
+    <div class="poster skeleton"></div>
+    <div class="specs">
+      <div class="title skeleton"></div>
+      <div class="labels skeleton"></div>
+      <div class="plot skeleton"></div>
+    </div>
+  `;
         await (0, _movie.getMovieDetails)(history.state.id);
         console.log((0, _movieDefault.default).state.movie);
         const { movie  } = (0, _movieDefault.default).state;
-        this.el.classList.add("container", "the-movie");
+        const bigPoster = movie.Poster.replace("SX300", "SX700");
         this.el.innerHTML = /* html */ `
       <div 
-      style="background-image: url(${movie.Poster})"
+      style="background-image: url(${bigPoster})"
       class="poster"></div>
       <div class="specs">
         <div class="title">
@@ -995,6 +1127,49 @@ class Movie extends (0, _rami.Component) {
 }
 exports.default = Movie;
 
-},{"../core/rami":"3wxuq","../store/movie":"kq1bo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["e11Rl","gLLPy"], "gLLPy", "parcelRequire6588")
+},{"../core/rami":"3wxuq","../store/movie":"kq1bo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gdB30":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rami = require("../core/rami");
+var _about = require("../store/about");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
+class About extends (0, _rami.Component) {
+    render() {
+        const { photo , name , email , github  } = (0, _aboutDefault.default).state;
+        this.el.classList.add("container", "about");
+        this.el.innerHTML = /* html */ `
+        <div 
+        style="background-image: url(${photo})" 
+        class="photo"></div>
+        <p class="name">${name}</p>
+        <p>
+            <a 
+            href="https://mail.google.com/mail?view=cm&fs=1&to=${email}" 
+            target="_blank">${email}</a>
+        </p>
+        <p><a href="${github}" target="_blank">GitHub</a></p>
+        `;
+    }
+}
+exports.default = About;
+
+},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}],"4fDiL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rami = require("../core/rami");
+class NotFound extends (0, _rami.Component) {
+    render() {
+        this.el.classList.add("container", "not-found");
+        this.el.innerHTML = /* html */ `
+            <h1>
+                Sorry..<br>
+                Page Not Found.
+            </h1>
+        `;
+    }
+}
+exports.default = NotFound;
+
+},{"../core/rami":"3wxuq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["e11Rl","gLLPy"], "gLLPy", "parcelRequire6588")
 
 //# sourceMappingURL=index.4d6bcbeb.js.map
