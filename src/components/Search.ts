@@ -13,18 +13,19 @@ export default class Search extends Component {
         </button>
         `;
 
-    const inputEl = this.el.querySelector("input");
-    inputEl.addEventListener("input", () => {
+    const inputEl = this.el.querySelector("input"); //옵셔널체이닝이 없이 확신한다면 단언해도 괜찮음 'as HTMLDivElement'
+    inputEl?.addEventListener("input", () => {
+      //옵셔널체이닝 사용 가능
       movieStore.state.searchText = inputEl.value;
     });
-    inputEl.addEventListener("keydown", (event) => {
+    inputEl?.addEventListener("keydown", (event) => {
       if (event.key === "Enter" && movieStore.state.searchText.trim()) {
         searchMovies(1);
       }
     });
 
     const btnEl = this.el.querySelector(".btn");
-    btnEl.addEventListener("click", () => {
+    btnEl?.addEventListener("click", () => {
       if (movieStore.state.searchText.trim()) {
         searchMovies(1);
       }
