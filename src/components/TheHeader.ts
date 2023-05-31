@@ -1,6 +1,15 @@
 import { Component } from "../core/rami";
 
+interface State {
+  [key: string]: unknown;
+  menus: {
+    name: string;
+    href: string;
+  }[];
+}
+
 export default class TheHeader extends Component {
+  public state!: State; //!명확한 할당단언
   constructor() {
     super({
       tagName: "header",
@@ -51,7 +60,7 @@ export default class TheHeader extends Component {
                 </ul>
             </nav>
             <a href="#/about" class="user">
-                <img src="https://heropy.blog/css/images/logo.png" alt="User">
+                <img src="https://lh3.googleusercontent.com/a/AAcHTtfHUXjYyvZYiCWBiCPoeealyOL3devNNh8BRyoj=s288-c-no" alt="User">
             </a>
         `;
   }

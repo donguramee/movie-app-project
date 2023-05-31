@@ -23,7 +23,7 @@ export default class MovieList extends Component {
             ? `<div class="message">${movieStore.state.message}</div>`
             : '<div class="movies"></div>'
         }
-        <div class="the-loader hide"></div>
+        <div class="the-loader hide"></div> 
         `;
 
     const moviesEl = this.el.querySelector(".movies");
@@ -35,7 +35,7 @@ export default class MovieList extends Component {
           }).el
       )
     );
-    const loaderEl = this.el.querySelector(".the-loader");
+    const loaderEl = this.el.querySelector(".the-loader") as HTMLDivElement;
     movieStore.state.loading
       ? loaderEl.classList.remove("hide")
       : loaderEl.classList.add("hide");
